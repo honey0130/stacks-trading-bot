@@ -1,6 +1,6 @@
 # Stacks Trading Bot
 
-Welcome to the Stacks Trading Bot! This bot is designed for trading on the Stacks blockchain, specifically supporting platforms like **STX City**, **Velar**, and **Alex**. With capabilities for **snipping**, **volume analysis**, **arbitrage**, and **airdrop management**, this bot optimizes your trading strategies effectively.
+Welcome to the Stacks Trading Bot! This bot is designed for trading on the Stacks blockchain, specifically supporting platforms like **STX City**, **Velar**, and **Alex**. With capabilities for **snipping**, **volume**, **arbitrage**, and **airdrop**, this bot optimizes your trading strategies effectively.
 
 ## Table of Contents
 
