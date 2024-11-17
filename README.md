@@ -33,9 +33,3 @@ Welcome to the Stacks Trading Bot! This bot is designed for trading on the Stack
 
 To get a local copy of this project up and running, follow these steps:
 
-### Prerequisites
-
-Make sure you have the following software installed:
-
-- [Python](https://www.python.org/downloads/) (v3.6 or higher)
-- `pip` for Python package management
