@@ -69,5 +69,5 @@ Before running the bots, ensure you have the following:
 
 2. Install
 
-```bash
-npm install
+   ```bash
+   npm install
