@@ -1,186 +1,163 @@
-# 📦 Stacks Trading Bot
-[![CI](https://github.com/Borodin/typescript-telegram-bot-api/actions/workflows/ci.yml/badge.svg)](https://github.com/Borodin/typescript-telegram-bot-api/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/typescript-telegram-bot-api)](https://www.npmjs.com/package/typescript-telegram-bot-api)
-[![npm](https://img.shields.io/npm/dt/typescript-telegram-bot-api)](https://www.npmjs.com/package/typescript-telegram-bot-api)
-[![codecov](https://codecov.io/github/Borodin/typescript-telegram-bot-api/graph/badge.svg?token=509N5AZDTV)](https://codecov.io/github/Borodin/typescript-telegram-bot-api)
-[![GitHub](https://img.shields.io/badge/Bot_API-v7.10-0088cc)](https://core.telegram.org/bots/api#september-6-2024)
+# Stacks Trading Bot Suite
 
+## Overview
+The **Stacks Trading Bot Suite** consists of several automated trading bots built on the **Stacks blockchain**. These bots are designed to interact with platforms like **Alex**, **Velar**, and **STX City** to provide various trading strategies. The suite includes the following bots:
 
-This is a TypeScript wrapper for the [Telegram Bot API](https://core.telegram.org/bots/api) Node.js and browsers. It allows you to easily interact with the Telegram Bot API using TypeScript.
-Check out the browser live demo here: [StarExplorer](https://borodin.github.io/StarExplorer/).
+- **Arbitrage Bot**: Exploits price differences between exchanges for profit.
+- **Sniping Bot**: Executes trades based on specific price movements.
+- **Volume Bot**: Trades based on market volume spikes.
+- **Copy Trading Bot**: Copies trades from experienced traders to follow their strategies.
+
+These bots are designed to help traders maximize profits and automate their strategies across different Stacks-based platforms.
+
+## Supported Platforms
+The bots are compatible with the following platforms:
+
+- **Alex**: A decentralized exchange (DEX) on the Stacks blockchain.
+- **Velar**: A platform for liquidity provision and trading on Stacks.
+- **STX City**: A trading and market-making platform on Stacks.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Supported Platforms](#supported-platforms)
+- [Bots and Their Functions](#bots-and-their-functions)
+  - [Arbitrage Bot](#arbitrage-bot)
+  - [Sniping Bot](#sniping-bot)
+  - [Volume Bot](#volume-bot)
+  - [Copy Trading Bot](#copy-trading-bot)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [License](#license)
+
+## Bots and Their Functions
+
+### Arbitrage Bot
+The **Arbitrage Bot** scans multiple platforms for price discrepancies and takes advantage of the differences between them. It buys on one platform and sells on another to profit from the spread.
+
+**Features:**
+- Identifies arbitrage opportunities between **Alex**, **Velar**, and **STX City**.
+- Configurable price threshold to trigger trades.
+- Executes trades automatically once an arbitrage opportunity is found.
+
+### Sniping Bot
+The **Sniping Bot** is designed to execute high-frequency trades based on specific price movements or triggers. It can react to sudden price drops or spikes, allowing users to capitalize on short-term market opportunities.
+
+**Features:**
+- Monitors specific price levels and triggers buys when conditions are met.
+- Optimized for fast execution to capitalize on rapid market movements.
+- Configurable for different sniping strategies.
+
+### Volume Bot
+The **Volume Bot** trades based on market volume. It buys assets when trading volume spikes beyond a specified threshold, capitalizing on trends caused by large market movements.
+
+**Features:**
+- Monitors market volume in real time.
+- Executes buy trades when significant volume thresholds are met.
+- Configurable for different volume levels and slippage tolerances.
+
+### Copy Trading Bot
+The **Copy Trading Bot** allows users to follow and copy trades from experienced traders. It mimics their strategies and automatically executes the same trades with customized risk settings.
+
+**Features:**
+- Automatically copies trades from a chosen leader trader.
+- Customizable risk levels and trade allocations.
+- Tracks performance of copied trades and adjusts strategies accordingly.
 
 ## Installation
 
-```bash
-npm install typescript-telegram-bot-api
-```
-## Usage
+### Prerequisites
+Before running the bots, ensure you have the following:
 
-```typescript
-import { TelegramBot } from 'typescript-telegram-bot-api';
+- **Node.js** installed (v14 or higher).
+- **npm** (Node Package Manager) to install dependencies.
+- API keys for each platform (**Alex**, **Velar**, **STX City**), which you can get from the respective platform’s developer portal.
 
-const bot = new TelegramBot({ botToken: 'YOUR_BOT_TOKEN' });
-bot.startPolling();
+### Steps to Install
 
-bot.on('message', (message) => {
-  console.log('Received message:', message.text);
-});
+1. Clone this repository to your local machine:
 
-bot.on('message:sticker', (message) => {
-  console.log('Received sticker:', message.sticker.emoji);
-});
+   ```bash
+   git clone https://github.com/yourusername/stacks-trading-bots.git
+Navigate into the project directory:
 
-bot.getMe()
-  .then(console.log)
-  .catch(console.error);
-```
+bash
+Copy code
+cd stacks-trading-bots
+Install the required dependencies:
 
-## Supported Methods
-Descriptions of methods can be found at https://core.telegram.org/bots/api#available-methods.
-Method names and parameters correspond to those in the official API documentation.
-Each method returns a Promise that resolves with data received from the API.
+bash
+Copy code
+npm install
+Make sure you have your API keys set up in your config.json file (explained below).
 
-In case of an API error, the Promise will be rejected with a `TelegramError` containing the error code and description from the API.
-If the API error includes a `retry_after` field, the library will retry the request after the specified number of seconds, until a response without an error is received. This behavior can be disabled by setting the `autoRetry` parameter to `false`.
+Configuration
+The bots require a configuration file (config.json) to define parameters for their strategies. You will need to adjust the settings based on your preferences and the platforms you're using.
 
-If the error is not related to the API, the Promise will be rejected with a different error.
-
-For sending files, you can use not only ```'file_id'``` or ```'url'```, but also ```stream.Readable``` or ```Buffer```.
-To send files with additional parameters, such as a filename or specific contentType, use the ```FileOptions``` wrapper class.
-```typescript
-import { TelegramBot, FileOptions } from 'typescript-telegram-bot-api';
-import { createReadStream } from 'fs';
-import { readFile } from 'fs/promises';
-
-
-await bot.sendPhoto({
-  chat_id: chat_id,
-  photo: 'AgACAgIAAxkDAAIF62Zq43...AgADcwADNQQ',
-  caption: 'file_id',
-});
-
-// or
-
-await bot.sendPhoto({
-  chat_id: chat_id,
-  photo: 'https://unsplash.it/640/480',
-  caption: 'url',
-});
-
-// or
-
-await bot.sendPhoto({
-  chat_id: chat_id,
-  photo: createReadStream('photo.jpg'),
-  caption: 'stream',
-});
-
-// or 
-
-await bot.sendPhoto({
-  chat_id: chat_id,
-  photo: await readFile('photo.jpg'),
-  caption: 'buffer',
-});
-
-// or 
-
-await bot.sendPhoto({
-  chat_id: chat_id,
-  photo: new FileOptions(
-    await readFile('photo.jpg'), {
-      filename: 'custom_file_name.jpg',
-      contentType: 'image/jpeg',
-    }
-  ),
-  caption: 'FileOptions',
-});
-
-// or in browser
-
-await bot.sendPhoto({
-  chat_id: chat_id,
-  photo: input.files[0], // or new File(…)
-  caption: 'file',
-});
-```
-## Events
-TelegramBot is an EventEmitter that emits the [Update](https://core.telegram.org/bots/api#update) event and also emits events for each type of [Message](https://core.telegram.org/bots/api#message), such as `message:audio`, when the `audio` field is present in the message object.
-```typescript
-bot.on('message', (message) => {
-  console.log('Received message:', message.text);
-});
-
-bot.on('message_reaction', (messageReactionUpdated) => {
-  console.log('Received message_reaction:', messageReactionUpdated);
-});
-
-bot.on('message:audio', (message) => {
-  console.log('Received audio:', message.audio.file_id);
-});
-```
-
-## Webhooks
-To use webhooks, you need to set up a server that will receive updates from Telegram. You can use the [express](https://www.npmjs.com/package/express) library for this purpose.
-
-This example demonstrates a basic Telegram bot that responds with a reaction to any incoming message using Webhooks. The use of [ngrok](https://www.npmjs.com/package/ngrok) as a tunneling service simplifies the setup, allowing the bot to be easily deployed in various environments without complex network configuration. This approach is ideal for quick testing and development purposes. For production use, you should consider deploying the bot on a server with a public IP address and a valid SSL certificate.
-```typescript
-import 'dotenv/config';
-import * as ngrok from 'ngrok';
-import express from "express";
-import {TelegramBot} from "./src";
-import {Update} from "./src/types";
-
-const port = 3001;
-
-const bot = new TelegramBot({
-  botToken: process.env.TEST_TELEGRAM_TOKEN as string,
-});
-
-bot.on('message', async (message) => {
-  await bot.setMessageReaction({
-    chat_id: message.chat.id,
-    message_id: message.message_id,
-    reaction: [{
-      type: 'emoji', emoji: '👍'
-    }]
-  });
-});
-
-const app = express();
-app.use(express.json());
-app.post('/', async (req, res) => {
-  try {
-    await bot.processUpdate(req.body as Update);
-    res.sendStatus(200);
-  } catch (e) {
-    res.sendStatus(500);
+Example config.json
+json
+Copy code
+{
+  "arbitrage": {
+    "enabled": true,
+    "platforms": ["Alex", "Velar", "STX City"],
+    "arbitrage_threshold": 0.02
+  },
+  "sniping": {
+    "enabled": true,
+    "trigger_price": 50,
+    "sniping_strategy": "fast"
+  },
+  "volume": {
+    "enabled": true,
+    "min_volume_threshold": 1000,
+    "max_slippage": 0.01
+  },
+  "copy_trading": {
+    "enabled": true,
+    "leader_id": "123456",
+    "risk_level": "medium"
+  },
+  "logging": {
+    "enabled": true,
+    "log_level": "info"
   }
-});
+}
+Arbitrage Bot:
 
-(async () => {
-  app.listen(port, async () => {
-    const url = await ngrok.connect({
-      proto: 'http',
-      addr: port,
-    });
-    await bot.setWebhook({url});
-    console.log('Set Webhook to', url);
-  })
-})();
+arbitrage_threshold: Minimum price difference for executing an arbitrage trade.
+platforms: List of platforms to check for arbitrage opportunities.
+Sniping Bot:
 
-process.on('SIGINT', async () => {
-  await bot.deleteWebhook();
-  await ngrok.disconnect();
-  console.log('Webhook deleted');
-});
-```
+trigger_price: The price at which to trigger a sniping trade.
+sniping_strategy: Choose between strategies like "fast" or "aggressive."
+Volume Bot:
 
+min_volume_threshold: The minimum trading volume to trigger a trade.
+max_slippage: Maximum acceptable slippage when executing trades.
+Copy Trading Bot:
 
-## Tests
-```bash
-npm test
-```
-CI/CD is set up with GitHub Actions. Tests and linters are run on every pull request.
+leader_id: The ID of the trader whose trades you want to copy.
+risk_level: Choose between "low", "medium", or "high" risk levels.
+Platform API Keys
+You need to configure API keys for each platform you're using. Store your API keys securely and pass them to the bots through environment variables or the config file.
 
-If you want to run tests locally, follow the instructions in [tests/README.md](tests/).
+Usage
+Once you've installed the bots and configured the config.json file, you can start them by running the following command:
+
+bash
+Copy code
+npm start
+This will start the main bot execution and trigger all the bots based on the configuration.
+
+Example Output
+When the bots are running, you will see logs in the console that show the progress of each bot:
+
+yaml
+Copy code
+2024-11-18T12:30:00.000Z [info] - Arbitrage opportunity found between Alex and Velar: Price difference of 0.03
+2024-11-18T12:30:05.000Z [info] - Sniping opportunity found! Trigger price of 50 reached.
+2024-11-18T12:30:10.000Z [info] - Volume spike detected: 1200 volume exceeds threshold of 1000
+Stopping the Bots
+To stop the bots, simply press Ctrl + C in the terminal.
