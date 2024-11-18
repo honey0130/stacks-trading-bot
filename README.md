@@ -1,7 +1,7 @@
 # Stacks Trading Bot
 
 ## Overview
-The **Stacks Trading Bot ** consists of several automated trading bots built on the **Stacks blockchain**. These bots are designed to interact with platforms like **Alex**, **Velar**, and **STX City** to provide various trading strategies. The Bot includes the following bots:
+The ** Stacks Trading Bot ** consists of several automated trading bots built on the **Stacks blockchain**. These bots are designed to interact with platforms like **Alex**, **Velar**, and **STX City** to provide various trading strategies. The Bot includes the following bots:
 
 - **Arbitrage Bot**: Exploits price differences between DEX for profit.
 - **Sniping Bot**: Monitor when a pool is created in Pump Fun. Then buy memecoin and after sell tokens when the memecoin price goes up.
