@@ -26,6 +26,8 @@ The **Arbitrage Bot** scans multiple platforms for price discrepancies and takes
 - Identifies arbitrage opportunities between **Alex**, **Velar**, and **STX City**.
 - Configurable price threshold to trigger trades.
 - Executes trades automatically once an arbitrage opportunity is found.
+  ![Screenshot_76](https://github.com/user-attachments/assets/a127ee77-5e2f-4ac3-8a8f-fb20a81b30c5)
+
 
 ### Sniping Bot
 The **Sniping Bot** is designed to execute high-frequency trades based on specific price movements or triggers. It can react to sudden price drops or spikes, allowing users to capitalize on short-term market opportunities.
@@ -34,6 +36,8 @@ The **Sniping Bot** is designed to execute high-frequency trades based on specif
 - Monitors specific price levels and triggers buys when conditions are met.
 - Optimized for fast execution to capitalize on rapid market movements.
 - Configurable for different sniping strategies.
+  ![Screenshot_74](https://github.com/user-attachments/assets/d7ff90e2-87bb-4de6-a802-c0acea2ce7d2)
+
 
 ### Volume Bot
 The **Volume Bot** trades based on market volume. It buys assets when trading volume spikes beyond a specified threshold, capitalizing on trends caused by large market movements.
