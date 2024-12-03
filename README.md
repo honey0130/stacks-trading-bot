@@ -37,6 +37,9 @@ The **Sniping Bot** is designed to execute high-frequency trades based on specif
 - Optimized for fast execution to capitalize on rapid market movements.
 - Configurable for different sniping strategies.
   ![Screenshot_74](https://github.com/user-attachments/assets/d7ff90e2-87bb-4de6-a802-c0acea2ce7d2)
+  
+  ![Screenshot_75](https://github.com/user-attachments/assets/df8635da-1deb-489a-9412-4c58f3508a81)
+
 
 
 ### Volume Bot
